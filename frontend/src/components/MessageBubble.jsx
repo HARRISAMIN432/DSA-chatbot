@@ -1,7 +1,21 @@
 import { User, Bot } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const MessageBubble = ({ message, role }) => {
   const isUser = role === "user";
+  const [msg, setMsg] = useState("");
+
+  useEffect(() => {
+    if (!message) return;
+
+    let cleanMessage = message
+      .replace(/^```html\s*/, "")
+      .replace(/\s*```$/, "")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+
+    setMsg(cleanMessage);
+  }, [message]);
 
   return (
     <div
@@ -29,11 +43,18 @@ const MessageBubble = ({ message, role }) => {
 
         <div
           className={`
-          px-4 py-3 rounded-2xl shadow-lg
-          ${isUser ? "bg-primary-500 text-white" : "bg-gray-700 text-gray-100"}
-        `}
+    px-4 py-3 rounded-2xl shadow-lg
+    ${isUser ? "bg-primary-500 text-white" : "bg-gray-700 text-gray-100"}
+  `}
         >
-          <p className="whitespace-pre-wrap leading-relaxed">{message}</p>
+          {isUser ? (
+            <p className="whitespace-pre-wrap leading-relaxed">{msg}</p>
+          ) : (
+            <div
+              className="whitespace-pre-wrap leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: msg }}
+            />
+          )}
         </div>
       </div>
     </div>

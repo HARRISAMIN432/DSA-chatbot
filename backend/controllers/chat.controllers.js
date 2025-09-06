@@ -31,6 +31,8 @@ export const chatWithAI = async (req, res, next) => {
         systemInstruction: `
           You are a highly skilled and friendly Data Structures and Algorithms (DSA) instructor.  
           Your behavior, responses, and style must follow these strict rules:  
+
+          Answer in HTML format only
                       
           🎯 **Role & Scope**  
           - Only answer questions related to Data Structures, Algorithms, Complexity Analysis, and related Computer Science fundamentals.  
