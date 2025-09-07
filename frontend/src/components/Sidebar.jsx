@@ -1,11 +1,4 @@
-import {
-  X,
-  MessageSquare,
-  Plus,
-  Search,
-  MoreHorizontal,
-  Trash2,
-} from "lucide-react";
+import { X, MessageSquare, Plus, Search, Trash2 } from "lucide-react";
 import { useChat } from "../context/ChatContext.jsx";
 import { chatService } from "../services/chatService.js";
 import { useEffect, useState } from "react";
@@ -53,7 +46,6 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Overlay for mobile */}
       {isOpen && (
         <div
           className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fade-in"
@@ -75,10 +67,8 @@ const Sidebar = ({ isOpen, onClose }) => {
         `}
       >
         <div className="flex flex-col h-full relative">
-          {/* Background gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-800/20 to-slate-900/40" />
 
-          {/* Header */}
           <div className="relative p-6 border-b border-slate-700/50">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold text-white">Conversations</h2>
@@ -90,7 +80,6 @@ const Sidebar = ({ isOpen, onClose }) => {
               </button>
             </div>
 
-            {/* New Chat Button */}
             <button
               onClick={handleNewChat}
               className="
@@ -106,7 +95,6 @@ const Sidebar = ({ isOpen, onClose }) => {
               <span className="text-white font-semibold">New Conversation</span>
             </button>
 
-            {/* Search */}
             {topics.length > 0 && (
               <div className="relative mt-4">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -128,7 +116,6 @@ const Sidebar = ({ isOpen, onClose }) => {
             )}
           </div>
 
-          {/* Topics List */}
           <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 p-3 relative">
             {filteredTopics.length === 0 ? (
               <div className="text-center text-slate-400 mt-12 px-4">
@@ -172,7 +159,6 @@ const Sidebar = ({ isOpen, onClose }) => {
                         }
                       `}
                     >
-                      {/* Active indicator */}
                       {currentTopic === topic && (
                         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-400 to-cyan-400 rounded-r-full" />
                       )}
@@ -193,15 +179,12 @@ const Sidebar = ({ isOpen, onClose }) => {
                       </div>
                     </button>
 
-                    {/* Topic actions */}
                     {hoveredTopic === index && (
                       <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-1 bg-slate-800/90 backdrop-blur-sm rounded-lg p-1">
                         <button
                           className="p-1.5 rounded hover:bg-slate-700/50 text-slate-400 hover:text-white transition-colors"
                           title="More options"
-                        >
-                          <MoreHorizontal className="h-3.5 w-3.5" />
-                        </button>
+                        ></button>
                         <button
                           className="p-1.5 rounded hover:bg-red-500/20 text-slate-400 hover:text-red-400 transition-colors"
                           title="Delete conversation"
@@ -216,7 +199,6 @@ const Sidebar = ({ isOpen, onClose }) => {
             )}
           </div>
 
-          {/* Footer */}
           <div className="relative p-4 border-t border-slate-700/50">
             <div className="text-center text-xs text-slate-500">
               <p>DSA Chatbot v2.0</p>

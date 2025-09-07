@@ -39,7 +39,6 @@ const MessageBubble = ({ message, role }) => {
           isUser ? "flex-row-reverse space-x-reverse" : ""
         }`}
       >
-        {/* Avatar */}
         <div className="flex-shrink-0 relative">
           <div
             className={`
@@ -58,14 +57,12 @@ const MessageBubble = ({ message, role }) => {
             )}
           </div>
 
-          {/* Online indicator for AI */}
           {!isUser && (
             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-slate-800 animate-pulse"></div>
           )}
         </div>
 
-        {/* Message Content */}
-        <div className="flex-1 min-w-0">
+        <div className="inline-block max-w-[75%]">
           <div
             className={`
               relative px-6 py-4 rounded-2xl shadow-lg backdrop-blur-sm border
@@ -76,7 +73,6 @@ const MessageBubble = ({ message, role }) => {
               }
             `}
           >
-            {/* Copy button for AI messages */}
             {!isUser && (
               <button
                 onClick={handleCopy}
@@ -91,7 +87,6 @@ const MessageBubble = ({ message, role }) => {
               </button>
             )}
 
-            {/* Message text */}
             <div className="group">
               {isUser ? (
                 <p className="whitespace-pre-wrap leading-relaxed font-medium">
@@ -105,7 +100,6 @@ const MessageBubble = ({ message, role }) => {
               )}
             </div>
 
-            {/* Message tail */}
             <div
               className={`
                 absolute top-4 w-3 h-3 rotate-45 border
@@ -118,7 +112,6 @@ const MessageBubble = ({ message, role }) => {
             />
           </div>
 
-          {/* Timestamp */}
           <div className={`mt-2 px-2 ${isUser ? "text-right" : "text-left"}`}>
             <span className="text-xs text-slate-500">
               {isUser ? "You" : "DSA Assistant"} •{" "}

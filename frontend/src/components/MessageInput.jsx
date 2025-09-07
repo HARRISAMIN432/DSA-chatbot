@@ -21,7 +21,6 @@ const MessageInput = ({ onSend, disabled }) => {
     }
   };
 
-  // Auto-resize textarea
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {
@@ -48,7 +47,6 @@ const MessageInput = ({ onSend, disabled }) => {
               }
             `}
           >
-            {/* Quick actions */}
             <div className="flex items-center space-x-2">
               {quickActions.map((action, index) => (
                 <button
@@ -62,7 +60,6 @@ const MessageInput = ({ onSend, disabled }) => {
               ))}
             </div>
 
-            {/* Text input */}
             <div className="flex-1 relative">
               <textarea
                 ref={textareaRef}
@@ -93,7 +90,6 @@ const MessageInput = ({ onSend, disabled }) => {
               )}
             </div>
 
-            {/* Send button */}
             <button
               type="submit"
               disabled={!message.trim() || disabled}

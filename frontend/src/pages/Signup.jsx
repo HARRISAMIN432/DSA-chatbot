@@ -46,7 +46,6 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 relative overflow-hidden">
-      {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.1),transparent_60%)]" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
@@ -56,7 +55,6 @@ const Signup = () => {
       />
 
       <div className="max-w-md w-full space-y-8 relative z-10">
-        {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-xl mb-6">
             <Sparkles className="h-10 w-10 text-white" />
@@ -67,7 +65,6 @@ const Signup = () => {
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           {error && (
             <div className="bg-red-500/10 backdrop-blur-sm border border-red-500/20 rounded-xl p-4 flex items-center space-x-3 animate-fade-in">
@@ -79,7 +76,6 @@ const Signup = () => {
           )}
 
           <div className="space-y-5">
-            {/* Username Field */}
             <div className="group">
               <label
                 htmlFor="username"
@@ -109,7 +105,6 @@ const Signup = () => {
               </div>
             </div>
 
-            {/* Email Field */}
             <div className="group">
               <label
                 htmlFor="email"
@@ -139,7 +134,6 @@ const Signup = () => {
               </div>
             </div>
 
-            {/* Password Field */}
             <div className="group">
               <label
                 htmlFor="password"
@@ -181,7 +175,6 @@ const Signup = () => {
             </div>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
@@ -204,7 +197,6 @@ const Signup = () => {
             )}
           </button>
 
-          {/* Footer */}
           <div className="text-center pt-6">
             <p className="text-slate-400">
               Already have an account?{" "}
