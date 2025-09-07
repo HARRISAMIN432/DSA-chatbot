@@ -1,11 +1,20 @@
-import { X, MessageSquare, Plus } from "lucide-react";
+import {
+  X,
+  MessageSquare,
+  Plus,
+  Search,
+  MoreHorizontal,
+  Trash2,
+} from "lucide-react";
 import { useChat } from "../context/ChatContext.jsx";
 import { chatService } from "../services/chatService.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { topics, setTopics, currentTopic, setCurrentTopic, clearMessages } =
     useChat();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [hoveredTopic, setHoveredTopic] = useState(null);
 
   useEffect(() => {
     loadTopics();
@@ -32,12 +41,22 @@ const Sidebar = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  const filteredTopics = topics.filter((topic) =>
+    topic.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const truncateText = (text, maxLength = 40) => {
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  };
+
   return (
     <>
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fade-in"
           onClick={onClose}
         />
       )}
@@ -46,65 +65,163 @@ const Sidebar = ({ isOpen, onClose }) => {
       <div
         className={`
           fixed lg:static inset-y-0 left-0 z-50
-          w-72 bg-gray-800 border-r border-gray-700 transform
-          ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-          transition-transform duration-300 ease-in-out
+          w-80 bg-slate-900/95 backdrop-blur-xl border-r border-slate-700/50 
+          transform transition-all duration-300 ease-out
+          ${
+            isOpen
+              ? "translate-x-0 shadow-2xl"
+              : "-translate-x-full lg:translate-x-0"
+          }
         `}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full relative">
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-800/20 to-slate-900/40" />
+
           {/* Header */}
-          <div className="p-4 border-b border-gray-700">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-white">
-                Conversations
-              </h2>
+          <div className="relative p-6 border-b border-slate-700/50">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold text-white">Conversations</h2>
               <button
                 onClick={onClose}
-                className="lg:hidden p-1 rounded hover:bg-gray-700 transition-colors"
+                className="lg:hidden p-2 rounded-lg hover:bg-slate-700/50 transition-all duration-200 hover:scale-105"
               >
-                <X className="h-5 w-5 text-gray-400" />
+                <X className="h-5 w-5 text-slate-400" />
               </button>
             </div>
+
+            {/* New Chat Button */}
             <button
               onClick={handleNewChat}
-              className="w-full mt-3 flex items-center space-x-2 px-3 py-2 bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors"
+              className="
+                w-full flex items-center space-x-3 px-4 py-3.5 
+                bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600
+                rounded-xl transition-all duration-200 shadow-lg hover:shadow-blue-500/25
+                hover:scale-105 active:scale-95 group
+              "
             >
-              <Plus className="h-4 w-4" />
-              <span className="text-white font-medium">New Chat</span>
+              <div className="p-1 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
+                <Plus className="h-4 w-4 text-white" />
+              </div>
+              <span className="text-white font-semibold">New Conversation</span>
             </button>
+
+            {/* Search */}
+            {topics.length > 0 && (
+              <div className="relative mt-4">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-4 w-4 text-slate-500" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search conversations..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="
+                    w-full pl-10 pr-4 py-2.5 bg-slate-800/50 border border-slate-700/50 
+                    rounded-lg text-white placeholder-slate-500 focus:outline-none 
+                    focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50
+                    transition-all duration-200
+                  "
+                />
+              </div>
+            )}
           </div>
 
           {/* Topics List */}
-          <div className="flex-1 overflow-y-auto scrollbar-thin p-2">
-            {topics.length === 0 ? (
-              <div className="text-center text-gray-400 mt-8">
-                <MessageSquare className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                <p>No conversations yet</p>
-                <p className="text-sm">Start a new chat to begin</p>
+          <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 p-3 relative">
+            {filteredTopics.length === 0 ? (
+              <div className="text-center text-slate-400 mt-12 px-4">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-800/50">
+                  <MessageSquare className="h-8 w-8 opacity-50" />
+                </div>
+                {topics.length === 0 ? (
+                  <>
+                    <p className="font-medium mb-1">No conversations yet</p>
+                    <p className="text-sm text-slate-500">
+                      Start a new chat to begin learning DSA
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="font-medium mb-1">No matches found</p>
+                    <p className="text-sm text-slate-500">
+                      Try a different search term
+                    </p>
+                  </>
+                )}
               </div>
             ) : (
-              <div className="space-y-1">
-                {topics.map((topic, index) => (
-                  <button
+              <div className="space-y-2">
+                {filteredTopics.map((topic, index) => (
+                  <div
                     key={index}
-                    onClick={() => handleTopicSelect(topic)}
-                    className={`
-                      w-full text-left px-3 py-3 rounded-lg transition-colors
-                      ${
-                        currentTopic === topic
-                          ? "bg-primary-500 text-white"
-                          : "text-gray-300 hover:bg-gray-700"
-                      }
-                    `}
+                    className="relative group"
+                    onMouseEnter={() => setHoveredTopic(index)}
+                    onMouseLeave={() => setHoveredTopic(null)}
                   >
-                    <div className="flex items-center space-x-2">
-                      <MessageSquare className="h-4 w-4 flex-shrink-0" />
-                      <span className="truncate font-medium">{topic}</span>
-                    </div>
-                  </button>
+                    <button
+                      onClick={() => handleTopicSelect(topic)}
+                      className={`
+                        w-full text-left px-4 py-3.5 rounded-xl transition-all duration-200
+                        hover:scale-105 active:scale-95 relative overflow-hidden
+                        ${
+                          currentTopic === topic
+                            ? "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 text-white shadow-lg"
+                            : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+                        }
+                      `}
+                    >
+                      {/* Active indicator */}
+                      {currentTopic === topic && (
+                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-400 to-cyan-400 rounded-r-full" />
+                      )}
+
+                      <div className="flex items-center space-x-3 ml-2">
+                        <div
+                          className={`p-1.5 rounded-lg transition-colors ${
+                            currentTopic === topic
+                              ? "bg-blue-500/30"
+                              : "bg-slate-700/50 group-hover:bg-slate-600/50"
+                          }`}
+                        >
+                          <MessageSquare className="h-4 w-4" />
+                        </div>
+                        <span className="font-medium flex-1 min-w-0">
+                          {truncateText(topic)}
+                        </span>
+                      </div>
+                    </button>
+
+                    {/* Topic actions */}
+                    {hoveredTopic === index && (
+                      <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center space-x-1 bg-slate-800/90 backdrop-blur-sm rounded-lg p-1">
+                        <button
+                          className="p-1.5 rounded hover:bg-slate-700/50 text-slate-400 hover:text-white transition-colors"
+                          title="More options"
+                        >
+                          <MoreHorizontal className="h-3.5 w-3.5" />
+                        </button>
+                        <button
+                          className="p-1.5 rounded hover:bg-red-500/20 text-slate-400 hover:text-red-400 transition-colors"
+                          title="Delete conversation"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             )}
+          </div>
+
+          {/* Footer */}
+          <div className="relative p-4 border-t border-slate-700/50">
+            <div className="text-center text-xs text-slate-500">
+              <p>DSA Chatbot v2.0</p>
+              <p>Powered by AI</p>
+            </div>
           </div>
         </div>
       </div>

@@ -31,6 +31,21 @@ export const ChatProvider = ({ children }) => {
     setHasMore(false);
   };
 
+  const deleteTopic = (topicToDelete) => {
+    setTopics((prev) =>
+      prev.filter(
+        (topic) =>
+          (typeof topic === "string" ? topic : topic.name) !== topicToDelete
+      )
+    );
+
+    // If the deleted topic is currently active, clear it
+    if (currentTopic === topicToDelete) {
+      setCurrentTopic(null);
+      clearMessages();
+    }
+  };
+
   const value = {
     messages,
     currentTopic,
@@ -44,6 +59,7 @@ export const ChatProvider = ({ children }) => {
     addMessage,
     setMessagesData,
     clearMessages,
+    deleteTopic,
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

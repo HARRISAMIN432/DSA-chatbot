@@ -171,3 +171,38 @@ export const getTopics = async (req, res, next) => {
     next(new ErrorHandler("Failed to fetch topics", 500));
   }
 };
+
+export const deleteTopic = async (req, res, next) => {
+  try {
+    const { topic } = req.params;
+
+    if (!topic) {
+      return next(new ErrorHandler("Topic is required", 400));
+    }
+
+    // Check if topic exists for this user
+    const topicExists = await chat.findOne({
+      user: req.user._id,
+      topic: decodeURIComponent(topic),
+    });
+
+    if (!topicExists) {
+      return next(new ErrorHandler("Topic not found", 404));
+    }
+
+    // Delete all messages for this topic and user
+    const result = await chat.deleteMany({
+      user: req.user._id,
+      topic: decodeURIComponent(topic),
+    });
+
+    res.json({
+      success: true,
+      message: `Topic "${decodeURIComponent(topic)}" deleted successfully`,
+      deletedCount: result.deletedCount,
+    });
+  } catch (error) {
+    console.error("Error deleting topic:", error);
+    next(new ErrorHandler("Failed to delete topic", 500));
+  }
+};

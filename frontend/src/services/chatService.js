@@ -1,33 +1,33 @@
 import api from "../config/api.js";
 
 export const chatService = {
-  async sendMessage(message, topic = null) {
-    try {
-      const response = await api.post("/chat", { message, topic });
-      return response.data;
-    } catch (error) {
-      throw error.response?.data || { message: "Network error" };
-    }
+  sendMessage: async (message, topic) => {
+    const response = await api.post("/chat", {
+      message,
+      topic,
+    });
+    return response.data;
   },
 
-  async getMessages(topic = null, page = 1, limit = 15) {
-    try {
-      const params = { page, limit };
-      if (topic) params.topic = topic;
+  getMessages: async (topic, page = 1, limit = 15) => {
+    const params = new URLSearchParams();
+    if (topic) params.append("topic", topic);
+    params.append("page", page.toString());
+    params.append("limit", limit.toString());
 
-      const response = await api.get("/chat/messages", { params });
-      return response.data;
-    } catch (error) {
-      throw error.response?.data || { message: "Network error" };
-    }
+    const response = await api.get(`/chat/messages?${params.toString()}`);
+    return response.data;
   },
 
-  async getTopics() {
-    try {
-      const response = await api.get("/chat/topics");
-      return response.data;
-    } catch (error) {
-      throw error.response?.data || { message: "Network error" };
-    }
+  getTopics: async () => {
+    const response = await api.get("/chat/topics");
+    return response.data;
+  },
+
+  deleteTopic: async (topic) => {
+    const response = await api.delete(
+      `/chat/topics/${encodeURIComponent(topic)}`
+    );
+    return response.data;
   },
 };
