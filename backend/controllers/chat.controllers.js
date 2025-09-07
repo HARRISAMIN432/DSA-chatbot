@@ -180,7 +180,6 @@ export const deleteTopic = async (req, res, next) => {
       return next(new ErrorHandler("Topic is required", 400));
     }
 
-    // Check if topic exists for this user
     const topicExists = await chat.findOne({
       user: req.user._id,
       topic: decodeURIComponent(topic),
@@ -190,7 +189,6 @@ export const deleteTopic = async (req, res, next) => {
       return next(new ErrorHandler("Topic not found", 404));
     }
 
-    // Delete all messages for this topic and user
     const result = await chat.deleteMany({
       user: req.user._id,
       topic: decodeURIComponent(topic),
