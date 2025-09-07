@@ -8,7 +8,6 @@ export const autheticate = async (req, res, next) => {
     if (!token) return next(new ErrorHandler("Unauthorized", 403));
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select("-password");
-    console.log(decoded);
     if (!user) return next(new ErrorHandler("Unauthorized", 403));
     req.user = user;
     next();
