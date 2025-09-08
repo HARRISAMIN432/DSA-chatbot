@@ -35,7 +35,7 @@ const MessageBubble = ({ message, role }) => {
       } mb-6 animate-fade-in`}
     >
       <div
-        className={`flex space-x-4 max-w-4xl w-full ${
+        className={`flex space-x-3 max-w-5xl w-full ${
           isUser ? "flex-row-reverse space-x-reverse" : ""
         }`}
       >
@@ -43,7 +43,7 @@ const MessageBubble = ({ message, role }) => {
           <div
             className={`
               w-10 h-10 rounded-xl flex items-center justify-center shadow-lg
-              ${isUser ? "bg-gradient-to-br from-purple-500 to-pink-500" : ""}
+              ${isUser ? "bg-[#4285f4]/90 text-white border-[#4285f4]/40" : ""}
             `}
           >
             {isUser ? (
@@ -58,21 +58,21 @@ const MessageBubble = ({ message, role }) => {
           )}
         </div>
 
-        <div className="inline-block max-w-[75%]">
+        <div className="inline-block max-w-[85%]">
           <div
             className={`
-              relative px-6 py-4 rounded-2xl shadow-lg backdrop-blur-sm border
+              relative px-4 py-3 rounded-2xl shadow-lg backdrop-blur-sm border
               ${
                 isUser
-                  ? "bg-gradient-to-br from-purple-500/90 to-pink-500/90 text-white border-purple-400/20 ml-12"
-                  : "bg-slate-800/80 text-slate-100 border-slate-700/50 mr-12"
+                  ? "bg-[#4285f4]/90 text-white border-[#4285f4]/40"
+                  : "bg-slate-800/80 text-slate-100 border-slate-700/50"
               }
             `}
           >
             {!isUser && (
               <button
                 onClick={handleCopy}
-                className="absolute top-3 right-3 p-1.5 rounded-lg bg-slate-700/50 hover:bg-slate-600/50 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                className="absolute top-2 right-2 p-1.5 rounded-lg bg-slate-700/50 hover:bg-slate-600/50 transition-all duration-200 opacity-0 group-hover:opacity-100"
                 title="Copy message"
               >
                 {copied ? (
@@ -101,14 +101,14 @@ const MessageBubble = ({ message, role }) => {
                 absolute top-4 w-3 h-3 rotate-45 border
                 ${
                   isUser
-                    ? "right-[-6px] bg-gradient-to-br from-purple-500/90 to-pink-500/90 border-purple-400/20 border-l-0 border-b-0"
+                    ? "right-[-6px] bg-[#4285f4]/90 border-[#4285f4]/40 border-l-0 border-b-0"
                     : "left-[-6px] bg-slate-800/80 border-slate-700/50 border-r-0 border-t-0"
                 }
               `}
             />
           </div>
 
-          <div className={`mt-2 px-2 ${isUser ? "text-right" : "text-left"}`}>
+          <div className={`mt-2 px-1 ${isUser ? "text-right" : "text-left"}`}>
             <span className="text-xs text-slate-500">
               {isUser ? "You" : "DSA Assistant"} •{" "}
               {new Date().toLocaleTimeString([], {
