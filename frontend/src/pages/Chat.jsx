@@ -3,7 +3,6 @@ import { useChat } from "../context/ChatContext.jsx";
 import { chatService } from "../services/chatService.js";
 import MessageBubble from "../components/MessageBubble.jsx";
 import MessageInput from "../components/MessageInput.jsx";
-import { Code2, Cpu, Sparkles, BookOpen, Lightbulb } from "lucide-react";
 
 const Chat = () => {
   const {
@@ -14,6 +13,7 @@ const Chat = () => {
     addMessage,
     setMessagesData,
     setTopics,
+    setCurrentTopic,
   } = useChat();
 
   const [sending, setSending] = useState(false);
@@ -47,7 +47,6 @@ const Chat = () => {
 
   const handleSendMessage = async (message) => {
     setSending(true);
-
     const userMessage = {
       message,
       role: "user",
@@ -57,14 +56,15 @@ const Chat = () => {
 
     try {
       const response = await chatService.sendMessage(message, currentTopic);
-
       const aiMessage = {
         message: response.response,
         role: "ai",
         createdAt: new Date().toISOString(),
       };
       addMessage(aiMessage);
-
+      if (!currentTopic && response.topic) {
+        setCurrentTopic(response.topic);
+      }
       const topicsResponse = await chatService.getTopics();
       setTopics(topicsResponse.topics || []);
     } catch (error) {
@@ -79,8 +79,6 @@ const Chat = () => {
       setSending(false);
     }
   };
-
-  const quickStarters = [];
 
   return (
     <div className="flex flex-col h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
@@ -107,30 +105,6 @@ const Chat = () => {
                 <p className="text-slate-400 text-2xl max-w-md mx-auto leading-relaxed p-10">
                   Struggling with a problem? I’ve got your back.
                 </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto mt-12">
-                {quickStarters.map((starter, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleSendMessage(starter.text)}
-                    className="group relative p-6 rounded-xl bg-slate-800/50 hover:bg-slate-800/80 border border-slate-700/50 hover:border-slate-600 transition-all duration-300 text-left hover:scale-105"
-                  >
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-r ${starter.color} opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-300`}
-                    />
-                    <div className="relative flex items-center space-x-3">
-                      <div
-                        className={`p-2 rounded-lg bg-gradient-to-r ${starter.color}`}
-                      >
-                        <starter.icon className="h-5 w-5 text-white" />
-                      </div>
-                      <span className="text-slate-200 font-medium group-hover:text-white transition-colors">
-                        {starter.text}
-                      </span>
-                    </div>
-                  </button>
-                ))}
               </div>
             </div>
           ) : (

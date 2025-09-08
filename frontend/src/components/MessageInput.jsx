@@ -1,4 +1,4 @@
-import { Send, Paperclip, Mic, Smile } from "lucide-react";
+import { Send } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const MessageInput = ({ onSend, disabled }) => {

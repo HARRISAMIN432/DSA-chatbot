@@ -1,4 +1,4 @@
-import { X, MessageSquare, Plus, Search, Trash2 } from "lucide-react";
+import { X, Plus, Search, Trash2 } from "lucide-react";
 import { useChat } from "../context/ChatContext.jsx";
 import { chatService } from "../services/chatService.js";
 import { useEffect, useState } from "react";

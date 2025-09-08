@@ -1,4 +1,4 @@
-import { User, Bot, Copy, Check } from "lucide-react";
+import { User, Copy, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const MessageBubble = ({ message, role }) => {
