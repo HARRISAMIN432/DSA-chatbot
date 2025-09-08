@@ -23,6 +23,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     try {
       await chatService.deleteTopic(topic);
       deleteTopic(topic);
+      setCurrentTopic(null);
     } catch (error) {
       console.error("Failed to delete topic:", error);
     }
