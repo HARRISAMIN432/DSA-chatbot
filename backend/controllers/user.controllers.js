@@ -53,6 +53,7 @@ export const signin = async (req, res, next) => {
       token,
     });
   } catch (e) {
+    console.log(e);
     next(new ErrorHandler(e.message, 500));
   }
 };
