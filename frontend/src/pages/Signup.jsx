@@ -71,13 +71,13 @@ const Signup = () => {
             <div className="group">
               <label
                 htmlFor="username"
-                className="block text-sm font-semibold text-slate-300 mb-3 group-focus-within:text-purple-400 transition-colors"
+                className="block text-sm font-semibold text-slate-300 mb-3 group-focus-within:text-blue-400 transition-colors"
               >
                 Username
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                  <User className="h-5 w-5 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
                 </div>
                 <input
                   id="username"
@@ -89,7 +89,7 @@ const Signup = () => {
                   className="
                     w-full pl-4 pr-4 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
                     rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 
-                    focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300
+                    focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300
                     hover:border-slate-600/50 hover:bg-slate-800/70
                   "
                   placeholder="Choose a username"
@@ -100,13 +100,13 @@ const Signup = () => {
             <div className="group">
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-slate-300 mb-3 group-focus-within:text-purple-400 transition-colors"
+                className="block text-sm font-semibold text-slate-300 mb-3 group-focus-within:text-blue-400 transition-colors"
               >
                 Email Address
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                  <Mail className="h-5 w-5 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
                 </div>
                 <input
                   id="email"
@@ -118,7 +118,7 @@ const Signup = () => {
                   className="
                     w-full pl-4 pr-4 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
                     rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 
-                    focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300
+                    focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300
                     hover:border-slate-600/50 hover:bg-slate-800/70
                   "
                   placeholder="Enter your email address"
@@ -129,13 +129,13 @@ const Signup = () => {
             <div className="group">
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-slate-300 mb-3 group-focus-within:text-purple-400 transition-colors"
+                className="block text-sm font-semibold text-blue-300 mb-3 group-focus-within:text-blue-400 transition-colors"
               >
                 Password
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                  <Lock className="h-5 w-5 text-blue-400 group-focus-within:text-blue-400 transition-colors" />
                 </div>
                 <input
                   id="password"
@@ -147,8 +147,8 @@ const Signup = () => {
                   className="
                     w-full pl-4 pr-12 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
                     rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 
-                    focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300
-                    hover:border-slate-600/50 hover:bg-slate-800/70
+                    focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300
+                    hover:border-blue-600/50 hover:bg-blue-800/70
                   "
                   placeholder="Create a password"
                 />
@@ -171,14 +171,14 @@ const Signup = () => {
             type="submit"
             disabled={loading}
             className="
-              relative w-full py-4 px-6 bg-gradient-to-r from-purple-500 to-pink-500 
-              hover:from-purple-600 hover:to-pink-600 text-white font-semibold rounded-xl 
+              relative w-full py-4 px-6 bg-gradient-to-r from-blue-500 to-cyan-500 
+              hover:from-blue-600 hover:to-cyan-600 text-white font-semibold rounded-xl 
               transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed 
-              hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105 active:scale-95
+              hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 active:scale-95
               overflow-hidden group
             "
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             {loading ? (
               <div className="relative flex items-center justify-center space-x-3">
                 <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
@@ -194,7 +194,7 @@ const Signup = () => {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-purple-400 hover:text-purple-300 font-semibold transition-colors hover:underline"
+                className="text-blue-400 hover:text-blue-300 font-semibold transition-colors hover:underline"
               >
                 Sign In
               </Link>
