@@ -1,15 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
-import {
-  Eye,
-  EyeOff,
-  AlertCircle,
-  Mail,
-  Lock,
-  User,
-  Sparkles,
-} from "lucide-react";
+import { Eye, EyeOff, AlertCircle, Mail, Lock, User } from "lucide-react";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -56,8 +48,8 @@ const Signup = () => {
 
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div className="text-center space-y-4">
-          <div className="flex items-center justify-center w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-xl mb-6">
-            <Sparkles className="h-10 w-10 text-white" />
+          <div className="flex items-center justify-center w-25 h-25 mx-auto rounded-2xl mb-2">
+            <img src="chatbot.svg" className="h-25 w-25 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-white">Join DSA Chatbot</h1>
           <p className="text-slate-400 text-lg">
@@ -95,7 +87,7 @@ const Signup = () => {
                   value={formData.username}
                   onChange={handleChange}
                   className="
-                    w-full pl-12 pr-4 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
+                    w-full pl-4 pr-4 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
                     rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 
                     focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300
                     hover:border-slate-600/50 hover:bg-slate-800/70
@@ -124,7 +116,7 @@ const Signup = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className="
-                    w-full pl-12 pr-4 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
+                    w-full pl-4 pr-4 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
                     rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 
                     focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300
                     hover:border-slate-600/50 hover:bg-slate-800/70
@@ -153,7 +145,7 @@ const Signup = () => {
                   value={formData.password}
                   onChange={handleChange}
                   className="
-                    w-full pl-12 pr-12 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
+                    w-full pl-4 pr-12 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
                     rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 
                     focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300
                     hover:border-slate-600/50 hover:bg-slate-800/70

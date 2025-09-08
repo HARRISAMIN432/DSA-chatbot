@@ -4,14 +4,29 @@ import { chatService } from "../services/chatService.js";
 import { useEffect, useState } from "react";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const { topics, setTopics, currentTopic, setCurrentTopic, clearMessages } =
-    useChat();
+  const {
+    topics,
+    setTopics,
+    currentTopic,
+    setCurrentTopic,
+    clearMessages,
+    deleteTopic,
+  } = useChat();
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredTopic, setHoveredTopic] = useState(null);
 
   useEffect(() => {
     loadTopics();
   }, []);
+
+  const handleDeleteTopic = async (topic) => {
+    try {
+      await chatService.deleteTopic(topic);
+      deleteTopic(topic);
+    } catch (error) {
+      console.error("Failed to delete topic:", error);
+    }
+  };
 
   const loadTopics = async () => {
     try {
@@ -53,7 +68,6 @@ const Sidebar = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar */}
       <div
         className={`
           fixed lg:static inset-y-0 left-0 z-50
@@ -120,7 +134,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             {filteredTopics.length === 0 ? (
               <div className="text-center text-slate-400 mt-12 px-4">
                 <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-800/50">
-                  <MessageSquare className="h-8 w-8 opacity-50" />
+                  <img src="message.svg" className="h-8 w-8 opacity-50" />
                 </div>
                 {topics.length === 0 ? (
                   <>
@@ -171,7 +185,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                               : "bg-slate-700/50 group-hover:bg-slate-600/50"
                           }`}
                         >
-                          <MessageSquare className="h-4 w-4" />
+                          <img src="message.svg" className="h-4 w-4" />
                         </div>
                         <span className="font-medium flex-1 min-w-0">
                           {truncateText(topic)}
@@ -186,6 +200,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                           title="More options"
                         ></button>
                         <button
+                          onClick={() => handleDeleteTopic(topic)}
                           className="p-1.5 rounded hover:bg-red-500/20 text-slate-400 hover:text-red-400 transition-colors"
                           title="Delete conversation"
                         >
@@ -197,13 +212,6 @@ const Sidebar = ({ isOpen, onClose }) => {
                 ))}
               </div>
             )}
-          </div>
-
-          <div className="relative p-4 border-t border-slate-700/50">
-            <div className="text-center text-xs text-slate-500">
-              <p>DSA Chatbot v2.0</p>
-              <p>Powered by AI</p>
-            </div>
           </div>
         </div>
       </div>

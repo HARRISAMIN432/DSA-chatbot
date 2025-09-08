@@ -80,28 +80,7 @@ const Chat = () => {
     }
   };
 
-  const quickStarters = [
-    {
-      icon: Code2,
-      text: "Explain binary search algorithm",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: Cpu,
-      text: "How do linked lists work?",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: BookOpen,
-      text: "What is Big O notation?",
-      color: "from-green-500 to-emerald-500",
-    },
-    {
-      icon: Lightbulb,
-      text: "Tree traversal techniques",
-      color: "from-orange-500 to-red-500",
-    },
-  ];
+  const quickStarters = [];
 
   return (
     <div className="flex flex-col h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
@@ -119,15 +98,14 @@ const Chat = () => {
           ) : messages.length === 0 ? (
             <div className="text-center space-y-8 py-12">
               <div className="relative">
-                <div className="flex items-center justify-center w-24 h-24 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-xl animate-pulse">
-                  <Code2 className="h-12 w-12 text-white" />
+                <div className="flex items-center justify-center w-24 h-24 mx-auto mb-6 rounded-2xl">
+                  <img src="chatbot.svg" className="h-24 w-24 text-white" />
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-3">
                   Ready to Master DSA?
                 </h3>
-                <p className="text-slate-400 text-lg max-w-md mx-auto leading-relaxed">
-                  Ask me about algorithms, data structures, complexity analysis,
-                  and more. Let's start your learning journey!
+                <p className="text-slate-400 text-2xl max-w-md mx-auto leading-relaxed p-10">
+                  Struggling with a problem? I’ve got your back.
                 </p>
               </div>
 

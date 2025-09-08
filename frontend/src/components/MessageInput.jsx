@@ -113,24 +113,6 @@ const MessageInput = ({ onSend, disabled }) => {
               )}
             </button>
           </div>
-
-          {!message && !disabled && (
-            <div className="flex items-center justify-center mt-3 space-x-6 text-xs text-slate-500">
-              <span className="flex items-center space-x-1">
-                <span>Press</span>
-                <kbd className="px-1.5 py-0.5 bg-slate-700/50 rounded text-slate-400">
-                  Enter
-                </kbd>
-                <span>to send</span>
-              </span>
-              <span className="flex items-center space-x-1">
-                <kbd className="px-1.5 py-0.5 bg-slate-700/50 rounded text-slate-400">
-                  Shift + Enter
-                </kbd>
-                <span>for new line</span>
-              </span>
-            </div>
-          )}
         </div>
       </form>
     </div>

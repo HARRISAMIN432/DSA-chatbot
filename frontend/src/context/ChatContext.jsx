@@ -38,8 +38,6 @@ export const ChatProvider = ({ children }) => {
           (typeof topic === "string" ? topic : topic.name) !== topicToDelete
       )
     );
-
-    // If the deleted topic is currently active, clear it
     if (currentTopic === topicToDelete) {
       setCurrentTopic(null);
       clearMessages();

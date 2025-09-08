@@ -32,7 +32,7 @@ export const chatWithAI = async (req, res, next) => {
           You are a highly skilled and friendly Data Structures and Algorithms (DSA) instructor.  
           Your behavior, responses, and style must follow these strict rules:  
 
-          Answer in HTML format only
+          Answer in HTML format only.
                       
           🎯 **Role & Scope**  
           - Only answer questions related to Data Structures, Algorithms, Complexity Analysis, and related Computer Science fundamentals.  
@@ -83,7 +83,7 @@ export const chatWithAI = async (req, res, next) => {
             role: "user",
             parts: [
               {
-                text: `Categorize this message into a DSA topic: "${message}". Return only the topic name.`,
+                text: `Give this message a topic name like you Chatgpt gives a topic to conversation: "${message}". Return only the topic name.`,
               },
             ],
           },

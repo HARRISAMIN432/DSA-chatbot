@@ -10,9 +10,14 @@ import { connectDB } from "./backend/config/database.js";
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://dsa-chatbot-xi.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "https://dsa-chatbot-xi.vercel.app",
+    origin: allowedOrigins,
     methods: ["GET", "PUT", "POST", "DELETE"],
     credentials: true,
   })
