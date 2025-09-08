@@ -98,7 +98,7 @@ const MessageBubble = ({ message, role }) => {
 
             <div
               className={`
-                absolute top-4 w-3 h-3 rotate-45 border
+                
                 ${
                   isUser
                     ? "right-[-6px] bg-[#4285f4]/90 border-[#4285f4]/40 border-l-0 border-b-0"
