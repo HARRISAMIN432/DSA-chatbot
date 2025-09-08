@@ -12,7 +12,7 @@ const MessageBubble = ({ message, role }) => {
     let cleanMessage = message
       .replace(/^```html\s*/, "")
       .replace(/\s*```$/, "")
-      .replace(/\n{3,}/g, "\n\n")
+      .replace(/\n{2,}/g, "\n")
       .trim();
 
     setMsg(cleanMessage);
